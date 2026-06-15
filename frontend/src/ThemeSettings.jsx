@@ -1,14 +1,24 @@
 import { useNavigate } from "react-router-dom";
 
-function ThemeSettings() {
+function ThemeSettings({ setTheme }) {
   const navigate = useNavigate();
 
   return (
     <div style={styles.container}>
       <h1> Theme Settings</h1>
 
-      <button style={styles.button}>🌙 Dark Mode</button>
-      <button style={styles.button}>☀️ Light Mode</button>
+      <button
+  style={styles.button}
+  onClick={() => setTheme("dark")}
+>
+  🌙 Dark Mode
+</button>
+      <button
+  style={styles.button}
+  onClick={() => setTheme("light")}
+>
+  ☀️ Light Mode
+</button>
 
       <button style={styles.back} onClick={() => navigate("/settings")}>
         ⬅ Back

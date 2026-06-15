@@ -22,6 +22,9 @@ function App() {
   const [showLanding, setShowLanding] = useState(true);
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [theme, setTheme] = useState("dark");
+
+  const isLight = theme === "light";
 
   if (showLanding) {
     return <Landing onStart={() => setShowLanding(false)} />;
@@ -33,8 +36,8 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div style={styles.page}>
-        <div style={styles.topbar}>
+      <div style={isLight ? styles.lightPage : styles.page}>
+        <div style={isLight ? styles.lightTopbar : styles.topbar}>
           <button
             style={styles.menuButton}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -42,7 +45,7 @@ function App() {
             ☰
           </button>
 
-          <h2 style={styles.logo}>🎓 Gradify</h2>
+          <h2 style={isLight ? styles.lightLogo : styles.logo}>🎓 Gradify</h2>
 
           <button style={styles.logout} onClick={() => setUser(null)}>
             Logout
@@ -50,20 +53,20 @@ function App() {
         </div>
 
         {menuOpen && (
-          <div style={styles.menuBox}>
-            <NavLink to="/profile" style={linkStyle}>Profile</NavLink>
-            <NavLink to="/" style={linkStyle}>Home</NavLink>
-            <NavLink to="/github" style={linkStyle}>GitHub</NavLink>
-            <NavLink to="/leetcode" style={linkStyle}>LeetCode</NavLink>
-            <NavLink to="/challenge" style={linkStyle}>Challenges</NavLink>
-            <NavLink to="/leaderboard" style={linkStyle}>Rank</NavLink>
-            <NavLink to="/resume" style={linkStyle}>Resume</NavLink>
-            <NavLink to="/analytics" style={linkStyle}>Analytics</NavLink>
-            <NavLink to="/settings" style={linkStyle}>Settings</NavLink>
+          <div style={isLight ? styles.lightMenuBox : styles.menuBox}>
+            <NavLink to="/profile" style={linkStyle} onClick={() => setMenuOpen(false)}>Profile</NavLink>
+            <NavLink to="/" style={linkStyle} onClick={() => setMenuOpen(false)}>Home</NavLink>
+            <NavLink to="/github" style={linkStyle} onClick={() => setMenuOpen(false)}>GitHub</NavLink>
+            <NavLink to="/leetcode" style={linkStyle} onClick={() => setMenuOpen(false)}>LeetCode</NavLink>
+            <NavLink to="/challenge" style={linkStyle} onClick={() => setMenuOpen(false)}>Challenges</NavLink>
+            <NavLink to="/leaderboard" style={linkStyle} onClick={() => setMenuOpen(false)}>Rank</NavLink>
+            <NavLink to="/resume" style={linkStyle} onClick={() => setMenuOpen(false)}>Resume</NavLink>
+            <NavLink to="/analytics" style={linkStyle} onClick={() => setMenuOpen(false)}>Analytics</NavLink>
+            <NavLink to="/settings" style={linkStyle} onClick={() => setMenuOpen(false)}>Settings</NavLink>
           </div>
         )}
 
-        <main style={styles.main}>
+        <main style={isLight ? styles.lightMain : styles.main}>
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/profile" element={<Profile />} />
@@ -75,7 +78,10 @@ function App() {
             <Route path="/analytics" element={<Analytics />} />
             <Route path="/settings" element={<Settings />} />
             <Route path="/settings/account" element={<AccountSettings />} />
-            <Route path="/settings/theme" element={<ThemeSettings />} />
+            <Route
+              path="/settings/theme"
+              element={<ThemeSettings setTheme={setTheme} />}
+            />
             <Route path="/settings/notifications" element={<NotificationSettings />} />
             <Route path="/settings/security" element={<SecuritySettings />} />
             <Route path="/settings/privacy" element={<PrivacySettings />} />
@@ -98,6 +104,7 @@ function linkStyle({ isActive }) {
       ? "linear-gradient(90deg,#7c3aed,#2563eb)"
       : "rgba(15,23,42,0.7)",
     fontWeight: "bold",
+    textAlign: "center",
   };
 }
 
@@ -109,10 +116,22 @@ const styles = {
     color: "white",
     fontFamily: "Arial, sans-serif",
     padding: "25px",
+    boxSizing: "border-box",
+  },
+
+  lightPage: {
+    minHeight: "100vh",
+    background:
+      "radial-gradient(circle at top left, rgba(59,130,246,0.18), transparent 30%), radial-gradient(circle at bottom right, rgba(168,85,247,0.18), transparent 30%), linear-gradient(135deg, #f8fafc, #e0f2fe)",
+    color: "#111827",
+    fontFamily: "Arial, sans-serif",
+    padding: "25px",
+    boxSizing: "border-box",
   },
 
   topbar: {
-    maxWidth: "1100px",
+    width: "95%",
+    maxWidth: "1600px",
     margin: "0 auto 25px",
     padding: "18px 22px",
     borderRadius: "22px",
@@ -122,6 +141,22 @@ const styles = {
     alignItems: "center",
     justifyContent: "space-between",
     boxShadow: "0 0 30px rgba(99,102,241,0.25)",
+    boxSizing: "border-box",
+  },
+
+  lightTopbar: {
+    width: "95%",
+    maxWidth: "1600px",
+    margin: "0 auto 25px",
+    padding: "18px 22px",
+    borderRadius: "22px",
+    background: "rgba(255,255,255,0.9)",
+    border: "1px solid rgba(59,130,246,0.25)",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between",
+    boxShadow: "0 0 25px rgba(59,130,246,0.18)",
+    boxSizing: "border-box",
   },
 
   menuButton: {
@@ -137,6 +172,13 @@ const styles = {
   logo: {
     margin: 0,
     fontSize: "26px",
+    color: "white",
+  },
+
+  lightLogo: {
+    margin: 0,
+    fontSize: "26px",
+    color: "#111827",
   },
 
   logout: {
@@ -150,17 +192,32 @@ const styles = {
   },
 
   menuBox: {
-    maxWidth: "1100px",
+    width: "95%",
+    maxWidth: "1600px",
     margin: "0 auto 25px",
     padding: "18px",
     borderRadius: "20px",
     background: "rgba(15,23,42,0.95)",
     border: "1px solid rgba(99,102,241,0.45)",
     boxShadow: "0 0 25px rgba(99,102,241,0.2)",
+    boxSizing: "border-box",
+  },
+
+  lightMenuBox: {
+    width: "95%",
+    maxWidth: "1600px",
+    margin: "0 auto 25px",
+    padding: "18px",
+    borderRadius: "20px",
+    background: "rgba(255,255,255,0.92)",
+    border: "1px solid rgba(59,130,246,0.25)",
+    boxShadow: "0 0 25px rgba(59,130,246,0.18)",
+    boxSizing: "border-box",
   },
 
   main: {
-    maxWidth: "1100px",
+    width: "95%",
+    maxWidth: "1600px",
     margin: "0 auto",
     padding: "40px",
     borderRadius: "32px",
@@ -169,6 +226,20 @@ const styles = {
     border: "1px solid rgba(99,102,241,0.6)",
     boxShadow:
       "0 0 30px rgba(99,102,241,0.35), 0 0 90px rgba(59,130,246,0.18)",
+    boxSizing: "border-box",
+  },
+
+  lightMain: {
+    width: "95%",
+    maxWidth: "1600px",
+    margin: "0 auto",
+    padding: "40px",
+    borderRadius: "32px",
+    background: "rgba(255,255,255,0.92)",
+    border: "1px solid rgba(59,130,246,0.25)",
+    boxShadow: "0 0 35px rgba(59,130,246,0.18)",
+    boxSizing: "border-box",
+    color: "#111827",
   },
 };
 

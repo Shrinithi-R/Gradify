@@ -74,7 +74,7 @@ const styles = {
     borderRadius: "12px",
     border: "1px solid #475569",
     backgroundColor: "#111827",
-    color: "white",
+    color: "inherit",
     fontSize: "16px",
   },
   button: {
@@ -84,7 +84,7 @@ const styles = {
     border: "none",
     borderRadius: "12px",
     background: "linear-gradient(90deg,#7c3aed,#2563eb)",
-    color: "white",
+    color: "inherit",
     fontWeight: "bold",
     fontSize: "16px",
   },
