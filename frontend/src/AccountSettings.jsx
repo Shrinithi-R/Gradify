@@ -26,7 +26,7 @@ function AccountSettings() {
       <button style={styles.button} onClick={saveChanges}>Save Changes</button>
 
       <button style={styles.back} onClick={() => navigate("/settings")}>
-        ⬅ Back
+         Back
       </button>
     </div>
   );

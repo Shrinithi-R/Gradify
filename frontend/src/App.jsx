@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, NavLink } from "react-router-dom";
 
 import Landing from "./Landing";
@@ -17,14 +17,40 @@ import ThemeSettings from "./ThemeSettings";
 import NotificationSettings from "./NotificationSettings";
 import SecuritySettings from "./SecuritySettings";
 import PrivacySettings from "./PrivacySettings";
+import DigitalWellbeing from "./DigitalWellbeing";
 
 function App() {
   const [showLanding, setShowLanding] = useState(true);
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [theme, setTheme] = useState("dark");
+
+  const [theme, setTheme] = useState(
+    localStorage.getItem("theme") || "dark"
+  );
 
   const isLight = theme === "light";
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  useEffect(() => {
+    if (!user) return;
+
+    const timer = setInterval(() => {
+      const today = new Date().toISOString().split("T")[0];
+      const dailyKey = `gradifyUsage_${today}`;
+      const weeklyKey = "gradifyWeeklyUsage";
+
+      const dailyUsage = Number(localStorage.getItem(dailyKey)) || 0;
+      const weeklyUsage = Number(localStorage.getItem(weeklyKey)) || 0;
+
+      localStorage.setItem(dailyKey, dailyUsage + 1);
+      localStorage.setItem(weeklyKey, weeklyUsage + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [user]);
 
   if (showLanding) {
     return <Landing onStart={() => setShowLanding(false)} />;
@@ -68,23 +94,41 @@ function App() {
 
         <main style={isLight ? styles.lightMain : styles.main}>
           <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/github" element={<Github />} />
-            <Route path="/leetcode" element={<Leetcode />} />
-            <Route path="/challenge" element={<Challenge />} />
-            <Route path="/leaderboard" element={<Leaderboard />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/analytics" element={<Analytics />} />
-            <Route path="/settings" element={<Settings />} />
-            <Route path="/settings/account" element={<AccountSettings />} />
+            <Route path="/" element={<Dashboard theme={theme} />} />
+            <Route path="/profile" element={<Profile theme={theme} />} />
+            <Route path="/github" element={<Github theme={theme} />} />
+            <Route path="/leetcode" element={<Leetcode theme={theme} />} />
+            <Route path="/challenge" element={<Challenge theme={theme} />} />
+            <Route path="/leaderboard" element={<Leaderboard theme={theme} />} />
+            <Route path="/resume" element={<Resume theme={theme} />} />
+            <Route path="/analytics" element={<Analytics theme={theme} />} />
+            <Route path="/settings" element={<Settings theme={theme} />} />
+            <Route path="/settings/account" element={<AccountSettings theme={theme} />} />
+
             <Route
               path="/settings/theme"
-              element={<ThemeSettings setTheme={setTheme} />}
+              element={<ThemeSettings theme={theme} setTheme={setTheme} />}
             />
-            <Route path="/settings/notifications" element={<NotificationSettings />} />
-            <Route path="/settings/security" element={<SecuritySettings />} />
-            <Route path="/settings/privacy" element={<PrivacySettings />} />
+
+            <Route
+              path="/settings/notifications"
+              element={<NotificationSettings theme={theme} />}
+            />
+
+            <Route
+              path="/settings/security"
+              element={<SecuritySettings theme={theme} />}
+            />
+
+            <Route
+              path="/settings/privacy"
+              element={<PrivacySettings theme={theme} />}
+            />
+
+            <Route
+              path="/settings/digital-wellbeing"
+              element={<DigitalWellbeing theme={theme} />}
+            />
           </Routes>
         </main>
       </div>

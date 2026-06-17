@@ -16,7 +16,7 @@ function PrivacySettings() {
       <button style={styles.danger} onClick={clearData}>Clear App Data</button>
 
       <button style={styles.back} onClick={() => navigate("/settings")}>
-        ⬅ Back
+         Back
       </button>
     </div>
   );

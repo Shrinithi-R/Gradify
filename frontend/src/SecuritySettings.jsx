@@ -45,7 +45,7 @@ function SecuritySettings() {
       <button style={styles.button} onClick={changePassword}>Change Password</button>
 
       <button style={styles.back} onClick={() => navigate("/settings")}>
-        ⬅ Back
+         Back
       </button>
     </div>
   );

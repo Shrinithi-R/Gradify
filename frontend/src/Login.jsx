@@ -3,24 +3,24 @@ import { useState } from "react";
 function Login({ onLogin }) {
   const [isSignup, setIsSignup] = useState(false);
 
-  const [name, setName] = useState("");
+  
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const [confirmPassword, setConfirmPassword] = useState("");
 
   function handleLogin() {
-    if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+    if (email.trim() === "" || password.trim() === "") {
       alert("Please fill all fields");
       return;
     }
 
-    onLogin(name);
+    onLogin(email);
   }
 
   function handleSignup() {
     if (
-      name.trim() === "" ||
+    
       email.trim() === "" ||
       password.trim() === "" ||
       confirmPassword.trim() === ""
@@ -34,12 +34,12 @@ function Login({ onLogin }) {
       return;
     }
 
-    localStorage.setItem("gradifyName", name);
+    
     localStorage.setItem("gradifyEmail", email);
     localStorage.setItem("gradifyPassword", password);
 
     alert("Account created successfully");
-    onLogin(name);
+    onLogin(email);
   }
 
   function forgotPassword() {
@@ -53,13 +53,7 @@ function Login({ onLogin }) {
 
         <br></br>
         <br></br>
-        <input
-          style={styles.input}
-          type="text"
-          placeholder="Enter your name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
+        
 
         <input
           style={styles.input}

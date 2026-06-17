@@ -1,41 +1,44 @@
 import { useNavigate } from "react-router-dom";
 
-function Dashboard() {
+function Dashboard({ theme }) {
   const navigate = useNavigate();
+  const isLight = theme === "light";
 
   const actions = [
     {
-      icon: "",
+      
       title: "Profile",
+
       text: "Create and manage your student profile",
       path: "/profile",
+      
     },
     {
-      icon: "",
+      
       title: "GitHub Tracker",
       text: "Check your repositories and GitHub score",
       path: "/github",
     },
     {
-      icon: "",
+      
       title: "LeetCode Tracker",
       text: "Track coding practice and problem solving",
       path: "/leetcode",
     },
     {
-      icon: "",
+     
       title: "Resume Analyzer",
       text: "Upload resume and check ATS readiness",
       path: "/resume",
     },
     {
-      icon: "",
+      
       title: "Challenges",
       text: "Complete weekly placement tasks",
       path: "/challenge",
     },
     {
-      icon: "",
+      
       title: "Rank",
       text: "View your leaderboard position",
       path: "/leaderboard",
@@ -43,10 +46,27 @@ function Dashboard() {
   ];
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>🎓 Gradify</h1>
- <br></br>
-      <p style={styles.subtitle}>
+    <div
+      style={{
+        ...styles.container,
+        color: isLight ? "#111827" : "#ffffff",
+      }}
+    >
+      <h1
+        style={{
+          ...styles.title,
+          color: isLight ? "#111827" : "#ffffff",
+        }}
+      >
+        🎓 Gradify
+      </h1>
+      <br></br>
+      <p
+        style={{
+          ...styles.subtitle,
+          color: isLight ? "#475569" : "#cbd5e1",
+        }}
+      >
         Choose what you want to improve today
       </p>
 
@@ -54,12 +74,39 @@ function Dashboard() {
         {actions.map((item, index) => (
           <div
             key={index}
-            style={styles.card}
+            style={{
+              ...styles.card,
+              background: isLight
+                ? "linear-gradient(145deg,#ffffff,#f1f5f9)"
+                : "linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.95))",
+              border: isLight
+                ? "1px solid #cbd5e1"
+                : "1px solid rgba(99,102,241,0.45)",
+              boxShadow: isLight
+                ? "0 8px 25px rgba(15,23,42,0.12)"
+                : "0 0 25px rgba(99,102,241,0.2)",
+              color: isLight ? "#111827" : "#ffffff",
+            }}
             onClick={() => navigate(item.path)}
           >
             <div style={styles.icon}>{item.icon}</div>
-            <h2>{item.title}</h2>
-            <p style={styles.text}>{item.text}</p>
+
+            <h2
+              style={{
+                color: isLight ? "#111827" : "#ffffff",
+              }}
+            >
+              {item.title}
+            </h2>
+
+            <p
+              style={{
+                ...styles.text,
+                color: isLight ? "#475569" : "#cbd5e1",
+              }}
+            >
+              {item.text}
+            </p>
           </div>
         ))}
       </div>
@@ -78,8 +125,7 @@ const styles = {
   },
 
   subtitle: {
-    color: "#cbd5e1",
-    fontSize: "20px",
+    fontSize: "25px",
     marginBottom: "35px",
   },
 
@@ -91,10 +137,7 @@ const styles = {
 
   card: {
     padding: "28px",
-    borderRadius: "24px",
-    background:
-      "linear-gradient(145deg, rgba(30,41,59,0.9), rgba(15,23,42,0.95))",
-    border: "1px solid rgba(99,102,241,0.45)",
+    borderRadius: "24px", 
     cursor: "pointer",
     transition: "0.3s",
     minHeight: "190px",
@@ -105,8 +148,7 @@ const styles = {
   },
 
   text: {
-    color: "#cbd5e1",
-    lineHeight: "1.6",
+    lineHeight: "2",
   },
 };
 
