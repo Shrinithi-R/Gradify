@@ -109,3 +109,38 @@ code {
   padding: 4px 8px;
   background: var(--code-bg);
 }
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  #root {
+    width: 100%;
+    border-inline: none;
+  }
+
+  h1 {
+    font-size: 28px !important;
+  }
+
+  h2 {
+    font-size: 20px !important;
+  }
+
+  input,
+  button {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  main {
+    padding: 18px !important;
+    border-radius: 20px !important;
+  }
+}

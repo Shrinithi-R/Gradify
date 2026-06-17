@@ -131,7 +131,7 @@ const styles = {
 
   grid: {
     display: "grid",
-    gridTemplateColumns: "repeat(3, 1fr)",
+    gridTemplateColumns: "repeat(auto-fit, minmax(220px, 1fr))",
     gap: "24px",
   },
 
@@ -150,6 +150,7 @@ const styles = {
   text: {
     lineHeight: "2",
   },
+  
 };
 
 export default Dashboard;

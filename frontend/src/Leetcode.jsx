@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { ScoreContext } from "./ScoreContext";
 
-function Leetcode() {
+function Leetcode({ theme }) {
+  const isLight = theme === "light";
   const { setLeetcodeScore } = useContext(ScoreContext);
 
   const [username, setUsername] = useState("");
@@ -22,12 +23,31 @@ function Leetcode() {
     setLeetcodeScore(finalScore);
   }
 
+  const inputStyle = {
+    ...styles.input,
+    backgroundColor: isLight ? "#ffffff" : "#111827",
+    color: isLight ? "#111827" : "#ffffff",
+    border: isLight ? "1px solid #cbd5e1" : "1px solid #475569",
+  };
+
   return (
-    <div style={styles.container}>
-      <h1 style={styles.title}>LeetCode Tracker</h1>
+    <div
+      style={{
+        ...styles.container,
+        color: isLight ? "#111827" : "#ffffff",
+      }}
+    >
+      <h1
+        style={{
+          ...styles.title,
+          color: isLight ? "#111827" : "#ffffff",
+        }}
+      >
+        LeetCode Tracker
+      </h1>
 
       <input
-        style={styles.input}
+        style={inputStyle}
         type="text"
         placeholder="Enter LeetCode username"
         value={username}
@@ -35,7 +55,7 @@ function Leetcode() {
       />
 
       <input
-        style={styles.input}
+        style={inputStyle}
         type="number"
         placeholder="Easy solved"
         value={easy}
@@ -43,7 +63,7 @@ function Leetcode() {
       />
 
       <input
-        style={styles.input}
+        style={inputStyle}
         type="number"
         placeholder="Medium solved"
         value={medium}
@@ -51,7 +71,7 @@ function Leetcode() {
       />
 
       <input
-        style={styles.input}
+        style={inputStyle}
         type="number"
         placeholder="Hard solved"
         value={hard}
@@ -62,7 +82,15 @@ function Leetcode() {
         Calculate LeetCode Score
       </button>
 
-      <div style={styles.card}>
+      <div
+        style={{
+          ...styles.card,
+          background: isLight ? "#ffffff" : "rgba(30, 41, 59, 0.7)",
+          border: isLight ? "1px solid #cbd5e1" : "1px solid #334155",
+          color: isLight ? "#111827" : "#ffffff",
+          boxShadow: isLight ? "0 8px 25px rgba(15,23,42,0.12)" : "none",
+        }}
+      >
         <h2>{username || "LeetCode User"}</h2>
         <h1 style={styles.score}>{score}/100</h1>
         <p>Easy × 1 | Medium × 3 | Hard × 5</p>
@@ -72,19 +100,23 @@ function Leetcode() {
 }
 
 const styles = {
-  container: { textAlign: "center" },
-  title: { fontSize: "34px" },
+  container: {
+    textAlign: "center",
+  },
+
+  title: {
+    fontSize: "34px",
+  },
+
   input: {
     width: "80%",
     padding: "15px",
     marginBottom: "15px",
     borderRadius: "12px",
-    border: "1px solid #475569",
-    backgroundColor: "#111827",
-    color: "white",
     fontSize: "16px",
     boxSizing: "border-box",
   },
+
   button: {
     width: "84%",
     padding: "15px",
@@ -96,15 +128,15 @@ const styles = {
     fontSize: "16px",
     cursor: "pointer",
   },
+
   card: {
     marginTop: "25px",
     padding: "25px",
     borderRadius: "18px",
-    background: "rgba(30, 41, 59, 0.7)",
-    border: "1px solid #334155",
   },
+
   score: {
-    color: "#a855f7",
+    color: "#7c3aed",
     fontSize: "42px",
   },
 };
