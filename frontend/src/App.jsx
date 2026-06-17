@@ -120,10 +120,7 @@ function App() {
               element={<SecuritySettings theme={theme} />}
             />
 
-            <Route
-              path="/settings/privacy"
-              element={<PrivacySettings theme={theme} />}
-            />
+            <Route path="/settings/privacy" element={<PrivacySettings theme={theme} />} />
 
             <Route
               path="/settings/digital-wellbeing"
