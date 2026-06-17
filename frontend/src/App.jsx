@@ -174,70 +174,71 @@ const styles = {
   width: "95%",
   maxWidth: "1600px",
   margin: "0 auto 25px",
-  padding: "14px",
+  padding: "12px",
   borderRadius: "22px",
   background: "rgba(15,23,42,0.9)",
   border: "1px solid rgba(99,102,241,0.45)",
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "55px 1fr 90px",
   alignItems: "center",
-  justifyContent: "space-between",
   gap: "10px",
   boxShadow: "0 0 30px rgba(99,102,241,0.25)",
   boxSizing: "border-box",
 },
 
-  lightTopbar: {
+lightTopbar: {
   width: "95%",
   maxWidth: "1600px",
   margin: "0 auto 25px",
-  padding: "14px",
+  padding: "12px",
   borderRadius: "22px",
   background: "rgba(255,255,255,0.9)",
   border: "1px solid rgba(59,130,246,0.25)",
-  display: "flex",
+  display: "grid",
+  gridTemplateColumns: "55px 1fr 90px",
   alignItems: "center",
-  justifyContent: "space-between",
   gap: "10px",
   boxShadow: "0 0 25px rgba(59,130,246,0.18)",
   boxSizing: "border-box",
 },
 
-  menuButton: {
-  fontSize: "24px",
+menuButton: {
+  width: "55px",
+  height: "45px",
+  fontSize: "22px",
   background: "linear-gradient(90deg,#7c3aed,#2563eb)",
   color: "white",
   border: "none",
   borderRadius: "12px",
-  padding: "10px 18px",
   cursor: "pointer",
-  flexShrink: 0,
 },
 
-  logo: {
+logo: {
   margin: 0,
-  fontSize: "clamp(20px, 5vw, 26px)",
+  fontSize: "clamp(18px, 5vw, 26px)",
   color: "white",
   textAlign: "center",
-  flex: 1,
+  whiteSpace: "nowrap",
 },
 
-  lightLogo: {
+lightLogo: {
   margin: 0,
-  fontSize: "clamp(20px, 5vw, 26px)",
+  fontSize: "clamp(18px, 5vw, 26px)",
   color: "#111827",
   textAlign: "center",
-  flex: 1,
+  whiteSpace: "nowrap",
 },
 
-  logout: {
-  padding: "10px 16px",
+logout: {
+  width: "90px",
+  height: "45px",
   border: "none",
   borderRadius: "12px",
   background: "linear-gradient(90deg,#ef4444,#dc2626)",
   color: "white",
   fontWeight: "bold",
   cursor: "pointer",
-  flexShrink: 0,
+  fontSize: "14px",
 },
 
   menuBox: {
